@@ -1,6 +1,6 @@
 
 .logoimg{
-    width: 60% !important;
+    width: 68% !important;
     
 }
 .plusdiv{
@@ -8,7 +8,6 @@
 }
 .plusdiv :hover{
     background-color: rgba(255, 255, 255, 0.55) !important ;
-
 }
 .e-plus{
     /* font-size: 30px !important; */
@@ -16,9 +15,7 @@
     justify-content: center !important;
     /* width: 10px !important; */
     font-size: 13px !important;
-
 }
-
 .searchbar{
     border: none !important;
 }
@@ -27,11 +24,15 @@
     font-size: 13px !important;
     width: fit-content;
 }
-
 .like{
     font-size: 13px !important;
 }
-
 .ticket{
     font-size: 13px !important;
+}
+.e-logo{
+    width: 12.6666% !important;
+}
+.ticket-icon{
+    
 }
