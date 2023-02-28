@@ -5,6 +5,7 @@
 }
 .plusdiv{
     width: 12% !important;
+    /* color: rgb(61, 100, 255) !important; */
 }
 .plusdiv :hover{
     background-color: rgba(255, 255, 255, 0.55) !important ;
@@ -23,6 +24,7 @@
     align-items: center !important;
     font-size: 13px !important;
     width: fit-content;
+    text-decoration: none !important;
 }
 .like{
     font-size: 13px !important;
@@ -33,6 +35,11 @@
 .e-logo{
     width: 12.6666% !important;
 }
-.ticket-icon{
-    
+
+Link:hover, Link:active, Link:visited, Link:link{
+    text-decoration: none !important;
 }
+a:hover, a:active, a:visited, a:link{
+    text-decoration: none !important;
+}
+
