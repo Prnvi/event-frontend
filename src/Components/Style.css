@@ -43,3 +43,40 @@ a:hover, a:active, a:visited, a:link{
     text-decoration: none !important;
 }
 
+.startdatepick{
+    height: 40px !important;
+    border: 1px solid #ced4da !important;
+    color: #6c757d !important;
+}
+.form-control{
+    border-radius: 0% !important;
+}
+.e-startTimeSelect{
+    border-radius: 0% !important;
+    height: 39px !important;
+    
+}
+.form-select{
+    border-radius: 0% !important;
+    color: #6c757d !important;
+}
+::placeholder{
+    color: #ced4da
+}
+.enddatepick{
+    height: 40px !important;
+    border: 1px solid #ced4da !important;
+    color: #6c757d !important;
+}
+.e-endTimeSelect{
+    border-radius: 0% !important;
+    height: 39px !important;
+    
+}
+.btn{
+    border-radius: 0% !important;
+}
+
+.submitbtn{
+
+}
