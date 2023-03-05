@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import {BsPersonCircle} from "react-icons/bs"
 import Logo from '../../assets/logo5.png'
-// import DatePicker from "react-datepicker";
 import('react-datepicker/dist/react-datepicker.css');
 
 
