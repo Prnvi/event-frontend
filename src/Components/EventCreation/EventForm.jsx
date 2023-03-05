@@ -1,31 +1,44 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import {BsPersonCircle} from "react-icons/bs"
 import Logo from '../../assets/logo5.png'
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import('react-datepicker/dist/react-datepicker.css');
 
+
 function EventForm() {
+  const {register, handleSubmit,formState:{errors}} = useForm();
+    
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
+  const [openVenue, setOpenVenue] = useState(true);
+  const [singleEvent, setSingleEvent] = useState(true);
+  const [ticketPrice,setTicketPrice] = useState(true);
 
-  const [date, setDate] =useState();
-  console.log("Date", date);
- 
-
-const [clicked, setClicked] = useState(false)
-const [click, setClick] = useState(false)
-const handelClickedVenue = () =>{
-  setClicked(true);
-
-}
 const handelClickedOnline = () =>{
-  setClick(true)
+  setOpenVenue(false)
+  console.log(openVenue)
 }
-
-
- 
+const handelClickedVenue = () =>{
+  setOpenVenue(true)
+}
+const handelClickedSingleEvent=() =>{
+  setSingleEvent(true)
+}
+const handelClickedRecurringEvent = () => {
+  setSingleEvent(false)
+}
+const handelClickedTicketPrice = () => {
+  setTicketPrice(true)
+}
+const handelClickedFreeEvent = () => {
+  setTicketPrice(false)
+}
 
   return (
     <div className="eventForm-container ">
+          {/* <!--Navigation Bar --> */}
          <nav className="navbar  nav-pills  navbar-light sticky container-xxl flex-wrap  ">
             <div className=" e-logo">
                   <Link  to="/" >
@@ -37,22 +50,26 @@ const handelClickedOnline = () =>{
                   <div className='col  mt-3 fs-8 '>abc@gmail</div>
             </div>
          </nav>
+          {/* <!--Navigation Bar --> */}
          {/* bg-light  */}
-     <form className="form page-container col-10 mx-auto"> 
+     <form className="form page-container col-10 mx-auto" onSubmit={handleSubmit((data) =>{
+        console.log(data);
+     })}> 
         <div className="col-8 mx-auto center-section-container">
-          <div className='create-eve-div flex m-5 col-md-12'>
+          {/* <!--Basic Infoof Event --> */}
+          <div className='create-eve-div flex m-5 col-md-12'> 
             <div class="col-md-10 form-outline">
               <h2 >Create your Event</h2>
               <label className="form-label " for="typeText"></label>
-              <input  className="form-control uname" type="text"  placeholder="Event Title"></input>
+              <input {...register("eventTitle",{required: true})} className="form-control eventTitle" name="eventTitle" type="text"  placeholder="Event Title"></input>
             </div>
             <div class="col-md-10 form-outline">
               <label className="form-label " for="typeText"></label>
-              <input  className="form-control uname" type="text"  placeholder="Organizer name"></input>
+              <input {...register("organizerName",{required: true})} className="form-control uname" name="organizerName" type="text"  placeholder="Organizer name"></input>
             </div>
             <div className="row my-1">
                 <div className="col-md-4  mt-4">
-                    <select className="form-select e-categorySelect"  placeholder="Category">
+                    <select {...register("category",{required: true})} className="form-select e-categorySelect"  placeholder="Category">
                         <option selected>Category</option>
                         <option value="1">Business & Professional</option>
                         <option value="2">Charity & Cause</option>
@@ -67,188 +84,95 @@ const handelClickedOnline = () =>{
                         <option value="11">Other</option>
                     </select>
                 </div>
-                <div className="col-md-4 form-outline">
-                    <label className="form-label " for="typeText"></label>
-                    <input  className="form-control uname" type="text"  placeholder="Sub Category"></input>
-                </div>
+                  <div className="col-md-4 form-outline">
+                      <label className="form-label " for="typeText"></label>
+                      <input {...register("subCategory")} className="form-control uname" type="text"  placeholder="Sub Category"></input>
+                  </div>
             </div>
             <div className="col-md-10 form-outline">
                 <label ClassName="form-label " for="typeText"></label>
-                <input  className="form-control description" type="text"  placeholder="Description"></input>
+                <input  {...register("description",{required: true})} className="form-control description" type="text"  placeholder="Description"></input>
             </div>
             </div>
+            {/* <!--Basic Info of Event --> */}
             <hr></hr>
             <div className="location-main-div flex m-5 col-md-12">
+              {/* <!--Event Location --> */}
               <div class="event-location ">
                 <h2>Location</h2>
-                <label  className="btn btn-outline-primary me-2" for="btn-check-outlined">Venue</label>  
-                <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
-                <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
-                <label  onClick={handelClickedOnline}className="btn btn-outline-primary m-2" for="btn-check-outlined">Online</label>
-              </div>
-              <div>
-                <div className="col-md-10">
-                  <label className="form-label my-2 " for="typeText">Venue Location</label>
-                  <input className="form-control location-name " type="text"  placeholder=""></input>
+                <button className="btn btn-outline-primary me-2" onClick={handelClickedVenue}>Venue</button>
+                <button {...register("online")}className="btn btn-outline-primary me-2" onClick={handelClickedOnline}>Online</button>
+                <div>
+                  {openVenue ? (
+                      <div className="col-md-10">
+                      <label className="form-label my-2 " for="typeText">Venue Location</label>
+                      <input {...register("locationName",{required: true})}className="form-control location-name " type="text"  placeholder=""></input>
+                    </div>
+                  ): (null) }
                 </div>
               </div>
-                  {/* {
-                (click ? (
-                  <p>Online events have unique page</p>):
-                  (<div>
-                    <label className="form-label" for="typeText">Venue Location</label>
-                      <input className="form-control orginzer-name" type="text"  placeholder=""></input>
-                    </div>))
-              } */}
             </div>
+            {/* <!--Event Location --> */}
             <hr></hr>
             <div className="datTimeMainDiv flex m-5 col-md-12">
-              <div className='eOccurance'>
-                 <h2>Date and time</h2>
-                 <label  className="btn btn-outline-primary me-3" for="btn-check-outlined">Single Event</label>  
-                 <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
-                 <label  className="btn btn-outline-primary m-2" for="btn-check-outlined">Recurring Event</label>  
-                 <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
+                  {/* <!--Event Date & Time --> */}
+                <div className='eOccurance'>
+                  <h2>Date and time</h2>
+                  <button className="btn btn-outline-primary me-2" onClick={handelClickedSingleEvent}>Single Event</button>
+                  <button {...register("recurringEvent")}className="btn btn-outline-primary me-2" onClick={handelClickedRecurringEvent}>Recurring Event</button>
+                </div>
+                  {singleEvent ? (
+                  <div>
+                      <div className='datePickerDiv row'>
+                        <input {...register("eStartDate",{required: true})}className="col-4 my-2 ms-2 startdatepick "selected={date} type="date" onChange={e=>setDate(e.target.value)}/>
+                        <div className="col-md-5  e-startTime ">
+                          <input {...register("eStartTime",{required: true})} className="col-12 my-2 ms-2 startTimepick "selected={time} type="time" onChange={e=>setTime(e.target.value)}/>
+                        </div>  
+                     </div> 
+                    <div className='datePickerDiv row'>
+                      <input {...register("eEndDate",{required: true})}className="col-4 my-2 ms-2 enddatepick "selected={date} type="date" onChange={e=>setDate(e.target.value)}/>
+                        <div className="col-md-5  e-endTime ">
+                          <input {...register("eEndTime",{required: true})} className="col-12 my-2 ms-2 endTimepick"  placeholder="event end time" selected={time} type="time" onChange={e=>setTime(e.target.value)}/>
+                        </div>  
+                    </div> 
+                  </div>
+                  ):( <p>You’ll be able to set a schedule for your recurring event in the next step.</p>
+                  )}
               </div>
-              <div className='datePickerDiv row'>
-                 <input className="col-4 my-2 ms-2 startdatepick "selected={date} type="date" onChange={e=>setDate(e.target.value)}/>
-                 <div className="col-md-5  e-startTime ">
-                    <select className="form-select mt-2 e-startTimeSelect "  placeholder="Start Time">
-                        <option selected>7:00 PM </option>
-                        <option value="7:00">7:00 PM</option>
-                        <option value="7:30">7:30 PM</option>
-                        <option value="8:00">8:00 PM</option>
-                        <option value="8:30">8:30 PM</option>
-                        <option value="9:00">9:00 PM</option>
-                        <option value="9:30">9:30 PM</option>
-                        <option value="10:00">10:00 PM</option>
-                        <option value="10:30">10:30 PM</option>
-                        <option value="11:00">11:00 PM</option>
-                        <option value="11:30">11:30 PM</option>
-                        <option value="00:00">00:00 AM</option>
-                        <option value="00:30">00:30 AM</option>
-                        <option value="01:00">1:00 AM</option>
-                        <option value="01:30">1:30 AM</option>
-                        <option value="02:00">2:00 AM</option>
-                        <option value="02:30">2:30 AM</option>
-                        <option value="03:00">3:00 AM</option>
-                        <option value="03:30">3:30 AM</option>
-                        <option value="04:00">4:00 AM</option>
-                        <option value="04:30">4:30 AM</option>
-                        <option value="05:00">5:00 AM</option>
-                        <option value="05:30">5:30 AM</option>
-                        <option value="06:00">6:00 AM</option>
-                        <option value="06:30">6:30 AM</option>
-                        <option value="7:00">7:00 AM</option>
-                        <option value="7:30">7:30 AM</option>
-                        <option value="8:00">8:00 AM</option>
-                        <option value="8:30">8:30 AM</option>
-                        <option value="9:00">9:00 AM</option>
-                        <option value="9:30">9:30 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="10:30">10:30 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="11:30">11:30 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                        <option value="12:00">12:30 PM</option>
-                        <option value="01:00">1:00 PM</option>
-                        <option value="01:30">1:30 PM</option>
-                        <option value="02:00">2:00 PM</option>
-                        <option value="02:30">2:30 PM</option>
-                        <option value="03:00">3:00 PM</option>
-                        <option value="03:30">3:30 PM</option>
-                        <option value="04:00">4:00 PM</option>
-                        <option value="04:30">4:30 PM</option>
-                        <option value="05:00">5:00 PM</option>
-                        <option value="05:30">5:30 PM</option>
-                        <option value="06:00">6:00 PM</option>
-                        <option value="06:30">6:30 PM</option>
-                    </select>
-                  </div>  
-               </div> 
-               <div className='datePickerDiv row'>
-                 <input className="col-4 my-2 ms-2 enddatepick "selected={date} type="date" onChange={e=>setDate(e.target.value)}/>
-                 <div className="col-md-5  e-endTime ">
-                    <select className="form-select mt-2 e-endTimeSelect "  placeholder="Start Time">
-                        <option selected>7:00 PM </option>
-                        <option value="7:00">7:00 PM</option>
-                        <option value="7:30">7:30 PM</option>
-                        <option value="8:00">8:00 PM</option>
-                        <option value="8:30">8:30 PM</option>
-                        <option value="9:00">9:00 PM</option>
-                        <option value="9:30">9:30 PM</option>
-                        <option value="10:00">10:00 PM</option>
-                        <option value="10:30">10:30 PM</option>
-                        <option value="11:00">11:00 PM</option>
-                        <option value="11:30">11:30 PM</option>
-                        <option value="00:00">00:00 AM</option>
-                        <option value="00:30">00:30 AM</option>
-                        <option value="01:00">1:00 AM</option>
-                        <option value="01:30">1:30 AM</option>
-                        <option value="02:00">2:00 AM</option>
-                        <option value="02:30">2:30 AM</option>
-                        <option value="03:00">3:00 AM</option>
-                        <option value="03:30">3:30 AM</option>
-                        <option value="04:00">4:00 AM</option>
-                        <option value="04:30">4:30 AM</option>
-                        <option value="05:00">5:00 AM</option>
-                        <option value="05:30">5:30 AM</option>
-                        <option value="06:00">6:00 AM</option>
-                        <option value="06:30">6:30 AM</option>
-                        <option value="7:00">7:00 AM</option>
-                        <option value="7:30">7:30 AM</option>
-                        <option value="8:00">8:00 AM</option>
-                        <option value="8:30">8:30 AM</option>
-                        <option value="9:00">9:00 AM</option>
-                        <option value="9:30">9:30 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="10:30">10:30 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="11:30">11:30 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                        <option value="12:00">12:30 PM</option>
-                        <option value="01:00">1:00 PM</option>
-                        <option value="01:30">1:30 PM</option>
-                        <option value="02:00">2:00 PM</option>
-                        <option value="02:30">2:30 PM</option>
-                        <option value="03:00">3:00 PM</option>
-                        <option value="03:30">3:30 PM</option>
-                        <option value="04:00">4:00 PM</option>
-                        <option value="04:30">4:30 PM</option>
-                        <option value="05:00">5:00 PM</option>
-                        <option value="05:30">5:30 PM</option>
-                        <option value="06:00">6:00 PM</option>
-                        <option value="06:30">6:30 PM</option>
-                    </select>
-                  </div>  
-               </div> 
-            </div>
+            {/* <!--Event Date & Time --> */}
             <hr></hr>
             <div className="ticketPrice-div flex m-5 col-md-12">
-              <div class="e-ticketPrice ">
-                <h2>Ticket Price</h2>
-                <label  className="btn btn-outline-primary me-2" for="btn-check-outlined">Free</label>  
-                <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
-                <input  type="radio" className="btn-check" id="btn-check-outlined" autocomplete="off"/>
-                <label  onClick={handelClickedOnline}className="btn btn-outline-primary m-2" for="btn-check-outlined">Ticket Price</label>
-              </div>
-              <div>
-                <div className="col-md-10">
-                  <label className="form-label my-2 " for="typeText">Price</label>
-                  <input className="form-control w-10 location-name " type="text"  placeholder="Enter ticket price"></input>
+                {/* <!--Event Ticket Price--> */}
+                <div class="e-ticketPrice ">
+                  <h2>Ticket Price</h2>
+                  <button className="btn btn-outline-primary me-2" onClick={handelClickedTicketPrice}>Ticket Price</button>
+                  <button {...register("freeEvent")}className="btn btn-outline-primary me-2" onClick={handelClickedFreeEvent}>Free</button>
+                    {(ticketPrice ? (
+                      <div className="col-md-10">
+                        <label className="form-label my-2 " for="typeText">Price</label>
+                        <input {...register("eTicketPrice")} className="form-control w-10 location-name " type="text"  placeholder="Enter ticket price"></input>
+                     </div>
+                    ): (null))}
+                  
                 </div>
-              </div>
+                <div>
+                  
+                </div>
             </div>
+            {/* <!--Event Ticket Price--> */}
             <hr></hr>
             <div>
+                {/* <!--Event Capacity--> */}
                 <div className="flex m-5 col-md-10 ">
-                <h2 className="">Event Capacity</h2>
-                  <label className="form-label my-2  col-7" for="typeText">Enter total number of seats available for the event</label>
-                  <input className="form-control col-4 location-name " type="text"  placeholder="Enter capacity"></input>
+                  <h2 className="">Event Capacity</h2>
+                  <label className="form-label my-2  " for="typeText">Enter total number of seats available for the event</label>
+                  <input {...register("eCapacity",{required: true})}className="form-control col-4 location-name " type="text"  placeholder="Enter capacity"></input>
                 </div>
+                 {/* <!--Event Capacity--> */}
               </div>
+              <button type="submit" class="btn btn-primary mb-5 ms-5">Create Event</button> 
         </div> 
-        <button className="btn submitbtm">Submit</button>   
+        
       </form>   
     </div>
   )

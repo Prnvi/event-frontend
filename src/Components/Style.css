@@ -63,20 +63,30 @@ a:hover, a:active, a:visited, a:link{
 ::placeholder{
     color: #ced4da
 }
-.enddatepick{
+.endTimepick,.startTimepick,.enddatepick{
     height: 40px !important;
     border: 1px solid #ced4da !important;
     color: #6c757d !important;
 }
-.e-endTimeSelect{
-    border-radius: 0% !important;
-    height: 39px !important;
-    
-}
+
 .btn{
     border-radius: 0% !important;
 }
 
-.submitbtn{
-
+.btn-primary{
+    background-color: #f05537 !important;
+    border: none !important;
+}
+.btn-primary:hover{
+    background-color: #d1410c !important;
+    border: none !important;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background-color: rgba(54,89,227,.1) !important;
+    border: 1px solid #3659e3 !important;
+    color: #3659e3 !important;
+}
+.btn-outline-primary{
+    border: 1px solid #ced4da !important;
+    color: #6c757d !important;
 }
