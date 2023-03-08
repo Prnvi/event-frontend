@@ -1,4 +1,6 @@
-
+/* .containerNavBar,.pageContainer,.eventForm-container{
+    font-family: 'Roboto', sans-serif !important;
+} */
 .logoimg{
     width: 68% !important;
     
@@ -6,6 +8,7 @@
 .plusdiv{
     width: 12% !important;
     /* color: rgb(61, 100, 255) !important; */
+    color: #3659e3 !important;
 }
 .plusdiv :hover{
     background-color: rgba(255, 255, 255, 0.55) !important ;
@@ -31,6 +34,9 @@
 }
 .ticket{
     font-size: 13px !important;
+}
+.ticket-icon{
+    color: black;
 }
 .e-logo{
     width: 12.6666% !important;
@@ -68,8 +74,11 @@ a:hover, a:active, a:visited, a:link{
     border: 1px solid #ced4da !important;
     color: #6c757d !important;
 }
-
 .btn{
+    font-size: 13px !important;
+    padding: 10px 20px 10px 20px !important;
+}
+.btn-custom{
     border-radius: 0% !important;
 }
 
@@ -89,4 +98,65 @@ a:hover, a:active, a:visited, a:link{
 .btn-outline-primary{
     border: 1px solid #ced4da !important;
     color: #6c757d !important;
+}
+.imageDiv{
+    max-height: fit-content !important;
+    max-height: 10% !important;
+    z-index: 0 !important;  
+}
+.text-over-img1 {
+    font-size: 8.4em;
+    line-height: 152px !important;
+    margin-top: -316px;
+    letter-spacing: -7px !important;
+    left:-35% !important;
+    height: 151px !important;
+    letter-spacing: -2px !important;
+}
+.text-over-img2 {
+    font-size: 3.2em;
+    margin-top: -95px;
+    left:-22% !important;
+    height: 37px !important;
+    letter-spacing: 1px !important;
+}
+.text-over-img3 {
+    font-size: 3.2em;
+    line-height: 70 px !important;
+    left:-38% !important;
+    height: 99px !important;
+    letter-spacing: 6px !important;
+    text-decoration: 10px underline !important;
+}
+.text-over-img4 {
+    font-size: 8.4em;
+    margin-top: -144px;
+    left: -21% !important;
+    height: 123px !important;
+    letter-spacing: -2px !important;
+}
+.carousel-caption{
+    font-family: 'News Cycle', sans-serif !important;
+    z-index:0 !important;
+    color: white !important;
+    position: relative !important;
+    font-weight:900 !important;
+    padding: 0 !important;  
+}
+.btnMainImg{
+    position: relative !important;
+    left:6% !important;
+    z-index: 2 !important;
+    bottom: 40px !important;
+}
+h1,h4{
+    font-family: 'Roboto', sans-serif !important;
+}
+.categoryNames{
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 100 !important;
+    color: #3659e3 !important;
+}
+.catbox{
+    width: 23% !important;
 }

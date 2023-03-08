@@ -1,7 +1,8 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from "./Components/NavBar";
+import MainPage from "./Components/MainPage/MainPage";
 import EventForm from "./Components/EventCreation/EventForm";
+
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
 
       <Router>
           <Routes>
-           <Route path="/" element={<NavBar/>}/>
+           <Route path="/" element={<MainPage/>}/>
            <Route path="/manage/event" element={<EventForm/>}/>
           </Routes>
         </Router>

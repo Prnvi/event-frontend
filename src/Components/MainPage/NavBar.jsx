@@ -1,7 +1,7 @@
 import React from 'react'
-import Logo from '../assets/logo5.png'
+import Logo from '../../assets/logo5.png'
 import { Link } from 'react-router-dom';
-import './Style.css'
+import '../../Components/Style.css'
 import { FaRegHeart } from 'react-icons/fa';
 import { BsSearch } from "react-icons/bs";
 import {BsPersonCircle} from "react-icons/bs"
@@ -22,7 +22,7 @@ import {TfiTicket} from 'react-icons/tfi'
               </Link>
           </div>
           <div className="col-5 row bg-light mx-2">
-              <div className='col-1 my-3 '>
+              <div className='col-1 mt-3 '>
                   <BsSearch/>
               </div>
               <div className="col-11 input">
@@ -41,7 +41,7 @@ import {TfiTicket} from 'react-icons/tfi'
             </div>
             <div className='col-1 d-flex row'>
                 <div className='row mt-2 ticket-icon  mb-1 fs-4'><TfiTicket className='w-10'/></div>
-                <div className="row  ticket mt-3 ms-2">Tickets</div>
+                <div className="row  ticket mt-2 ms-2">Tickets</div>
             </div>
             <div className="d-flex row m-2">
                 <div className='col fs-5  mt-2 '><BsPersonCircle/></div>

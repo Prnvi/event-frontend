@@ -6,8 +6,8 @@ import Logo from '../../assets/logo5.png'
 import('react-datepicker/dist/react-datepicker.css');
 
 
-function EventForm() {
-  const {register, handleSubmit,
+function EventForm() {']'
+  const {register, handleSubmit
     // formState:{errors}
   } = useForm();
     
@@ -16,6 +16,7 @@ function EventForm() {
   const [openVenue, setOpenVenue] = useState(true);
   const [singleEvent, setSingleEvent] = useState(true);
   const [ticketPrice,setTicketPrice] = useState(true);
+  // const [isClicked, setIsClicked] = useState(false);
 
 const handelClickedOnline = () =>{
   setOpenVenue(false)
@@ -36,7 +37,9 @@ const handelClickedTicketPrice = () => {
 const handelClickedFreeEvent = () => {
   setTicketPrice(false)
 }
-
+const onSubmit =(data) =>{
+  console.log(data)
+}
   return (
     <div className="eventForm-container ">
           {/* <!--Navigation Bar --> */}
@@ -53,9 +56,7 @@ const handelClickedFreeEvent = () => {
          </nav>
           {/* <!--Navigation Bar --> */}
          {/* bg-light  */}
-     <form className="form page-container col-10 mx-auto" onSubmit={handleSubmit((data) =>{
-        console.log(data);
-     })}> 
+     <form className="form page-container col-10 mx-auto" onSubmit={handleSubmit(onSubmit)}> 
         <div className="col-8 mx-auto center-section-container">
           {/* <!--Basic Infoof Event --> */}
           <div className='create-eve-div flex m-5 col-md-12'> 
@@ -101,8 +102,8 @@ const handelClickedFreeEvent = () => {
               {/* <!--Event Location --> */}
               <div class="event-location ">
                 <h2>Location</h2>
-                <button className="btn btn-outline-primary me-2" onClick={handelClickedVenue}>Venue</button>
-                <button {...register("online")}className="btn btn-outline-primary me-2" onClick={handelClickedOnline}>Online</button>
+                <button type="radio" className="btn btn-outline-primary btn-custom me-2" onClick={handelClickedVenue}>Venue</button>
+                <button  type="radio" {...register("online")}className="btn btn-outline-primary btn-custom me-2" onClick={handelClickedOnline}>Online</button>
                 <div>
                   {openVenue ? (
                       <div className="col-md-10">
@@ -119,8 +120,8 @@ const handelClickedFreeEvent = () => {
                   {/* <!--Event Date & Time --> */}
                 <div className='eOccurance'>
                   <h2>Date and time</h2>
-                  <button className="btn btn-outline-primary me-2" onClick={handelClickedSingleEvent}>Single Event</button>
-                  <button {...register("recurringEvent")}className="btn btn-outline-primary me-2" onClick={handelClickedRecurringEvent}>Recurring Event</button>
+                  <button className="btn btn-outline-primary btn-custom me-2" onClick={handelClickedSingleEvent}>Single Event</button>
+                  <button {...register("recurringEvent")}className="btn btn-outline-primary btn-custom me-2" onClick={handelClickedRecurringEvent}>Recurring Event</button>
                 </div>
                   {singleEvent ? (
                   <div>
@@ -146,12 +147,15 @@ const handelClickedFreeEvent = () => {
                 {/* <!--Event Ticket Price--> */}
                 <div class="e-ticketPrice ">
                   <h2>Ticket Price</h2>
-                  <button className="btn btn-outline-primary me-2" onClick={handelClickedTicketPrice}>Ticket Price</button>
-                  <button {...register("freeEvent")}className="btn btn-outline-primary me-2" onClick={handelClickedFreeEvent}>Free</button>
+                  
+                  <button type='radio' value={`${ticketPrice}`} className="btn btn-outline-primary btn-custom me-2" {...register("freeEvent")}  onClick={handelClickedTicketPrice} >Ticket Price</button>
+                  
+                  <button  type='radio' value={`${ticketPrice}`} {...register("freeEvent")} className="btn btn-outline-primary btn-custom me-2" onClick={handelClickedFreeEvent}>Free</button>
+                   
                     {(ticketPrice ? (
                       <div className="col-md-10">
                         <label className="form-label my-2 " for="typeText">Price</label>
-                        <input {...register("eTicketPrice")} className="form-control w-10 location-name " type="text"  placeholder="Enter ticket price"></input>
+                        <input {...register("eTicketPrice")}  className="form-control w-10 location-name " type="text"  placeholder="Enter ticket price"></input>
                      </div>
                     ): (null))}
                   
@@ -171,7 +175,7 @@ const handelClickedFreeEvent = () => {
                 </div>
                  {/* <!--Event Capacity--> */}
               </div>
-              <button type="submit" class="btn btn-primary mb-5 ms-5">Create Event</button> 
+              <button type="submit" class="btn btn-primary btn-custom mb-5 ms-5">Create Event</button> 
         </div> 
         
       </form>   
